@@ -1,0 +1,12 @@
+<div class="container mt-3" *ngIf="tag">
+  <h1>Tag: {{ tag.name }}</h1>
+  <p><strong>Description:</strong> {{ tag.description }}</p>
+  <p><strong>Couleur:</strong> <span class="color-box" [style.background]="tag.color"></span> {{ tag.color }}</p>
+  <p><strong>Statut:</strong> {{ tag.status }}</p>
+  <p><strong>Créé le:</strong> {{ tag.created_at | date }}</p>
+
+  <button class="btn btn-secondary" (click)="goBack()">Retour</button>
+</div>
+<div class="container mt-3" *ngIf="!tag">
+  <p>Tag non trouvé.</p>
+</div>

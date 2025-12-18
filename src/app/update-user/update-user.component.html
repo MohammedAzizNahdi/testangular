@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="card mb-5 mt-5 bg-light p-4">
+        <div class="card-name text-center"><h1>Mettre à jour un Utilisateur</h1></div>
+        <div class="card-body" *ngIf="userForm">
+            <form [formGroup]="userForm">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom :</label>
+                <input type="text" formControlName="name" id="nom" name="nom" class="form-control"/>
+                <div class="alert alert-danger m-2" *ngIf="userForm.get('name')?.errors?.['required'] && userForm.get('name')?.touched">Le champ "Nom" est obligatoire.</div>
+                <div class="alert alert-danger m-2" *ngIf="userForm.get('name')?.errors?.['minlength'] && userForm.get('name')?.touched">Le champ "Nom" doit avoir au moins 5 caractères.</div>
+                <div class="alert alert-danger m-2" *ngIf="userForm.get('name')?.errors?.['pattern'] && userForm.get('name')?.touched">Le champ "Nom" doit contenir que des lettres et doit commencer par une majuscule.</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email :</label>
+                <input type="email" formControlName="email" class="form-control" placeholder="" id="email" name="email">
+                <div class="alert alert-danger m-2" *ngIf="email?.errors?.['required'] && (email?.dirty || email?.touched)">Le champ "Email" est obligatoire.</div>
+                <div class="alert alert-danger m-2" *ngIf="email?.errors?.['email'] && (email?.dirty || email?.touched)">Le champ "Email" doit avoir un format email valide.</div>
+                <div class="alert alert-danger m-2" *ngIf="email?.errors?.['minlength'] && (email?.dirty || email?.touched)">Le champ "Email" doit avoir au moins 10 caractères.</div>
+
+            </div>
+            <div class="mb-3">
+                <label for="statut" class="form-label">Statut :</label>
+                <select class="form-select" formControlName="status" id="statut" name="statut" aria-label="Default select example">
+                <option selected value="null" disabled>-- Sélectionnez un statut --</option>
+                <option *ngFor="let c of statusList" value="{{c}}">{{ c }}</option>
+                </select>
+                <div class="alert alert-danger m-2" *ngIf="status?.errors?.['required'] && status?.touched">Le champ "Statut" est obligatoire.</div>
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Date de création :</label>
+                <input type="date" formControlName="created_at" class="form-control" readonly placeholder="" id="date" name="date"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="role" class="form-label">Rôle :</label>
+                <input type="text" formControlName="role" class="form-control" placeholder="" id="role" name="role"/>
+                <div class="alert alert-danger m-2" *ngIf="userForm.get('role')?.errors?.['required'] && (userForm.get('role')?.dirty || userForm.get('role')?.touched)">Le champ "Rôle" est obligatoire.</div>
+            </div>
+            <button type="submit" [disabled]="userForm.invalid" (click)="updateUser()" class="btn btn-primary">Soumettre</button>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+    <h1 class="text-center mt-3">Suggestion Details</h1>
+
+    <p>Details for suggestion with ID: {{ id }}</p>
+
+    <div *ngIf="suggestion">
+        <p><b>Title : </b> {{ suggestion.title}} </p>
+        <p><b>Category : </b> {{ suggestion.category}} </p>
+        <p><b>Description : </b> {{ suggestion.description}} </p>
+        <p><b>Date : </b> {{ suggestion.date | date}} </p>
+    </div>
+    <div *ngIf="!suggestion">
+        <p>Suggestion not found.</p>
+    </div>
+    <button class="btn btn-link" (click)="goToSuggestionList()">Return To Suggestion List.</button>
+
+</div>

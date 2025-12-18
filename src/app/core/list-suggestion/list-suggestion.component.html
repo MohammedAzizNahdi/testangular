@@ -1,0 +1,36 @@
+<div class="container">
+    <h1 class="text-center mt-2 mb-2">Liste des Suggestions </h1><br>
+    <a class="btn btn-link" routerLink="/suggestion/add">Ajouter une Suggestion </a>
+    <input type="text" class="form-control mb-3" placeholder="Rechercher des suggestions..." [(ngModel)]="searchTerm">
+    <div>
+        <div *ngFor="let suggestion of suggestions" class="card mb-3">
+            <div class="card-body" *ngIf="suggestion.category == searchTerm || suggestion.title == searchTerm || searchTerm == ''">
+                <h5 class="card-title">{{ suggestion.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted"><span class="text-primary">{{ suggestion.category }} </span> - {{ suggestion.date | date }}</h6> 
+                <p class="card-text">{{ suggestion.description }}</p>
+                <span *ngIf="suggestion.status == 'acceptee'" class="badge bg-success">{{ suggestion.status }}</span>
+                <span *ngIf="suggestion.status == 'refusee'" class="badge bg-danger">{{ suggestion.status }}</span>
+                <span *ngIf="suggestion.status == 'en_attente'" class="badge bg-warning">{{ suggestion.status }}</span>
+                <div *ngIf="suggestion.status != 'refusee'">
+                    <button (click)="nbLikesuggestion(suggestion)" class="btn btn-primary m-2"><i class="bi bi-hand-thumbs-up"></i> Like {{ suggestion?.nbLikes }} </button>
+                    <button (click)="addToFavorites(suggestion)" [disabled]="suggestion?.favorited" class="btn btn-secondary"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
+                    <a [routerLink]="['/suggestion/', suggestion.id]" class="btn btn-info text-white ms-2">Details</a>
+                    <a [routerLink]="['/suggestion/update/', suggestion.id]" class="btn btn-warning text-white ms-2">Modifier</a>
+                    <button (click)="deleteSuggestion(suggestion)" class="btn btn-danger text-white ms-2">Supprimer</button>
+                </div>
+            </div>
+    </div>
+
+    <div>
+        <h2 class="text-center mt-4 mb-3">Favoris</h2>
+        <div *ngIf="favoriteSuggestions.length === 0" class="text-center">Aucune suggestion favorite ajoutée.</div>
+        <div *ngFor="let favorite of favoriteSuggestions" class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ favorite.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted"><span class="text-primary">{{ favorite.category }} </span> - {{ favorite.date | date }}</h6> 
+                <p class="card-text">{{ favorite.description }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

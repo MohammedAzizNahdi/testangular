@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="card mb-5 mt-5 bg-light p-4">
+        <div class="card-title text-center"><h1>Modifier une Suggestion</h1></div>
+        <div class="card-body" *ngIf="suggestionForm">
+            <form [formGroup]="suggestionForm">
+            <div class="mb-3">
+                <label for="titre" class="form-label">Titre :</label>
+                <input type="text" formControlName="title" id="titre" name="titre" class="form-control"/>
+                <div class="alert alert-danger m-2" *ngIf="suggestionForm.get('title')?.errors?.['required'] && suggestionForm.get('title')?.touched">Le champ "Titre" est obligatoire.</div>
+                <div class="alert alert-danger m-2" *ngIf="suggestionForm.get('title')?.errors?.['minlength'] && suggestionForm.get('title')?.touched">Le champ "Titre" doit avoir au moins 5 caractères.</div>
+                <div class="alert alert-danger m-2" *ngIf="suggestionForm.get('title')?.errors?.['pattern'] && suggestionForm.get('title')?.touched">Le champ "Titre" doit contenir que des lettres et doit commencer par une majuscule.</div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description :</label>
+                <textarea formControlName="description" class="form-control" placeholder="" id="description" name="description" style="height: 100px"></textarea>
+                <div class="alert alert-danger m-2" *ngIf="description?.errors?.['required'] && (description?.dirty || description?.touched)">Le champ "Description" est obligatoire.</div>
+                <div class="alert alert-danger m-2" *ngIf="description?.errors?.['minlength'] && (description?.dirty || description?.touched)">Le champ "Description" doit avoir au moins 10 caractères.</div>
+
+            </div>
+            <div class="mb-3">
+                <label for="categorie" class="form-label">Catégorie :</label>
+                <select class="form-select" formControlName="category" id="categorie" name="categorie" aria-label="Default select example">
+                <option selected value="null" disabled>-- Sélectionnez une catégorie --</option>
+                <option *ngFor="let c of categories" value="{{c}}">{{ c }}</option>
+                </select>
+                <div class="alert alert-danger m-2" *ngIf="category?.errors?.['required'] && category?.touched">Le champ "Catégorie" est obligatoire.</div>
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Date :</label>
+                <input type="date" formControlName="date" class="form-control" readonly placeholder="" id="date" name="date"/>
+            </div>
+            <div class="mb-3">
+                <label for="statut" class="form-label">Statut :</label>
+                <input type="text" formControlName="status" id="statut" readonly name="statut" class="form-control">
+            </div>
+            <button type="submit" [disabled]="suggestionForm.invalid" (click)="updateSuggestion()" class="btn btn-primary">Soumettre</button>
+            </form>
+        </div>
+    </div>
+
+</div>

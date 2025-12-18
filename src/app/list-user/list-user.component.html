@@ -1,0 +1,37 @@
+<div class="container">
+    <h1 class="text-center mt-5">Liste des utilisateurs</h1>
+    <a routerLink="/user/add" class="btn btn-primary mb-3">Ajouter un utilisateur</a>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Date de création</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userList">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.created_at | date:'short' }}</td>
+                        <td>{{ user.status ? 'Actif' : 'Inactif' }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-info text-white me-2" [routerLink]="['/user/details/', user.id]">Détails</a>
+                            <a class="btn btn-sm btn-primary me-2" [routerLink]="['/user/update/', user.id]">Éditer</a>
+                            <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

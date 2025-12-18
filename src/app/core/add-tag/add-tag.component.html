@@ -1,0 +1,36 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title text-center"><h1>Ajouter un Tag</h1></div>
+      <form [formGroup]="tagForm">
+        <div class="mb-3">
+          <label>Nom *</label>
+          <input type="text" class="form-control" formControlName="name">
+          <div class="text-danger mt-1" *ngIf="name?.errors?.['required'] && name?.touched">Le nom est requis.</div>
+          <div class="text-danger mt-1" *ngIf="name?.errors?.['minlength'] && name?.touched">Le nom est trop court.</div>
+        </div>
+
+        <div class="mb-3">
+          <label>Description</label>
+          <textarea class="form-control" formControlName="description"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label>Couleur</label>
+          <input type="color" class="form-control form-control-color" formControlName="color">
+        </div>
+
+        <div class="mb-3">
+          <label>Statut</label>
+          <select class="form-select" formControlName="status">
+            <option value="active">active</option>
+            <option value="inactive">inactive</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" type="button" (click)="addTag()" [disabled]="tagForm.invalid">Soumettre</button>
+        <a class="btn btn-secondary ms-2" routerLink="/tags">Annuler</a>
+      </form>
+    </div>
+  </div>
+</div>

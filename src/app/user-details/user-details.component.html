@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="card mt-5 mb-5 bg-light p-4">
+        <div class="card-title text-center"><h1>Détails de l'utilisateur</h1></div>
+        <div class="card-body" *ngIf="user">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>ID :</strong> {{ user.id }}</li>
+                <li class="list-group-item"><strong>Nom :</strong> {{ user.name }}</li>
+                <li class="list-group-item"><strong>Email :</strong> {{ user.email }}</li>
+                <li class="list-group-item"><strong>Rôle :</strong> {{ user.role }}</li>
+                <li class="list-group-item"><strong>Date de création :</strong> {{ user.created_at | date:'short' }}</li>
+                <li class="list-group-item"><strong>Statut :</strong> {{ user.status ? 'Actif' : 'Inactif' }}</li>
+            </ul>
+        </div>
+        <a routerLink="/user/list" class="btn btn-secondary mt-3">Retour à la liste des utilisateurs <i class="fas fa-arrow-left"></i></a>
+    </div>
+</div>
